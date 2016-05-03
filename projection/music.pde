@@ -27,3 +27,5 @@ AudioSample sw;
 AudioSample sx;
 AudioSample sy;
 AudioSample sz;
+
+AudioSample[] sampleref = new AudioSample[0];

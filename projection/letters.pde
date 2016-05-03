@@ -1,7 +1,43 @@
 //---------------------------------------------------SHAPES
+float decidedely(float curypos){
+  if(curypos > 40){
+    println("toohigh");
+    return dely[int(random(0,2))];
+  }
+  else if(curypos < -40){
+    println("toolow");
+    return dely[int(random(2,4))];
+  }
+  else{
+    return dely[int(random(0,4))];
+  }
+}
+
+void renderShape(JSONObject shape, float alph){
+    String type = shape.getString("type");
+    float rot = 1.0*shape.getInt("rotate")*PI/180.0;
+    
+    int[] trans = shape.getJSONArray("translate").getIntArray();
+    pushMatrix();
+      translate(trans[0],trans[1]);
+      pushMatrix();
+        rotate(rot);
+        if(type.equals("tri"))
+          tricen(alph);
+        if(type.equals("lu"))
+          lucen(alph);
+        if(type.equals("ld"))
+          ldcen(alph);
+        if(type.equals("circ"))
+          circcen(alph);
+      popMatrix();
+    popMatrix();
+}
+
 void tri() {
   strokeWeight(6);
   strokeJoin(ROUND);
+  stroke(255);
   triangle (0,0, -9,15, 9,15);
 }
 
@@ -34,6 +70,42 @@ void ld() { //line down
   fill(255);
   stroke(255);
 }
+
+void tricen(float alph){
+  fill(255*alph);
+  stroke(255*alph);
+  strokeWeight(6);
+  strokeJoin(ROUND);
+  triangle (0,-10, -9,5, 9,5);
+}
+
+void circcen(float alph) {
+  strokeWeight(3);
+  fill(alph*98,alph*201,alph*215);
+  stroke(alph*98,alph*201,alph*215);
+  ellipse(0,0,20,20);
+}
+
+void lucen(float alph) { //line up
+  strokeWeight(8);
+  fill(alph*98,alph*201,alph*215);
+  stroke(alph*98,alph*201,alph*215);
+  pushMatrix();
+    rotate(PI/4.0);
+    line(0,-6.5,0,6.5);
+  popMatrix();
+}
+
+void ldcen(float alph) { //line down
+  strokeWeight(8);
+  fill(alph*98,alph*201,alph*215);
+  stroke(alph*98,alph*201,alph*215);
+  pushMatrix();
+    rotate(-PI/4.0);
+    line(0,-6.5,0,6.5);
+  popMatrix();
+}
+
 
 //---------------------------------------------------A
 void a() {
